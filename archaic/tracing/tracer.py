@@ -1,8 +1,8 @@
 from os import system
 
-from archaic.common.config import Config
-from archaic.tracing.frida_trace_wrap import Analyzer
-from archaic.tracing.filter import filter_file
+from common.config import Config
+from tracing.frida_trace_wrap import Analyzer
+from tracing.filter import filter_file
 
 
 def trace(config: Config):

@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-from archaic.common.config import Config
+from common.config import Config
 
 class Analyzer:
 
@@ -15,7 +15,7 @@ class Analyzer:
 
     def _spawn_target(self):
         changed_env = os.environ.copy()
-        changed_env["LD_LIBRARY_PATH"] = f"{self.config.lib_dir}"
+        changed_env["LD_LIBRARY_PATH"] = self.config.lib_dir
         proc = subprocess.Popen(
             [self._exec_path, *self.config.args],
             env=changed_env
@@ -30,7 +30,7 @@ class Analyzer:
             cmd.append("-i")
             cmd.append(function.strip())
         cmd.append("-p")
-        cmd.append(f"{pid}")
+        cmd.append("{}".format(pid))
 
         print(' '.join(cmd))
         with open(outname, "w") as file:
@@ -45,7 +45,6 @@ class Analyzer:
 
         proc = self._spawn_target()
         self._attach_trace(proc.pid, "{}/libcalls_{}.txt".format(self.config.data_dir, self.config.executable))
-        self._interact(proc)
 
     def _load_function_names(self, filename):
 

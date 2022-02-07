@@ -1,8 +1,8 @@
 import argparse
 import os
 
-from archaic.common.config import Config
-from archaic.tracing.tracer import trace
+from common.config import Config
+from tracing.tracer import trace
 
 
 

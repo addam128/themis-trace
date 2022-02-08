@@ -45,6 +45,7 @@ class Analyzer:
 
         proc = self._spawn_target()
         self._attach_trace(proc.pid, "{}/libcalls_{}.txt".format(self.config.data_dir, self.config.executable))
+        proc.communicate(input="yes")
 
     def _load_function_names(self, filename):
 

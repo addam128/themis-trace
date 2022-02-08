@@ -9,7 +9,7 @@ from tracing.tracer import trace
 def parse_args():
 
     parser = argparse.ArgumentParser("themis")
-    parser.add_argument("--module", type=str, choices=["trace"], help="functionality to invoke", required=True)
+    parser.add_argument("--pid", type=int, help="Pid if process was started separately")
     
     return parser.parse_args()
 
@@ -18,15 +18,13 @@ def main():
 
     args = parse_args()
     config = Config()
-    module = args.module
-
-    if module == "trace":
+    pid = args.pid
         
-        print("Setting up kernel for tracing...")
-        print("sudo sysctl kernel.yama.ptrace_scope=0")
-        os.system("sudo sysctl kernel.yama.ptrace_scope=0")
+    print("Setting up kernel for tracing...")
+    print("sudo sysctl kernel.yama.ptrace_scope=0")
+    os.system("sudo sysctl kernel.yama.ptrace_scope=0")
 
-        trace(config=config)
+    trace(config=config, pid=pid)
 
         
 

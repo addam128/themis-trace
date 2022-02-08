@@ -5,10 +5,10 @@ from tracing.frida_trace_wrap import Analyzer
 from tracing.filter import filter_file
 
 
-def trace(config: Config):
+def trace(config: Config, pid: int):
     Analyzer(
         config
-    ).extract_libcalls()
+    ).extract_libcalls(pid)
 
     filter_file(
         "{}/libcalls_{}.txt".format(config.data_dir, config.executable),

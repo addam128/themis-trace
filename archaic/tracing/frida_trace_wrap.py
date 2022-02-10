@@ -1,5 +1,6 @@
 import subprocess
 import os
+from time import sleep
 
 from common.config import Config
 
@@ -18,6 +19,7 @@ class Analyzer:
         changed_env["LD_LIBRARY_PATH"] = self.config.lib_dir
         proc = subprocess.Popen(
             [self._exec_path, *self.config.args],
+            stdin=subprocess.PIPE,
             env=changed_env
         )
         return proc
@@ -47,6 +49,8 @@ class Analyzer:
             proc = self._spawn_target()
             pid = proc.pid
         self._attach_trace(pid, "{}/libcalls_{}.txt".format(self.config.data_dir, self.config.executable))
+        sleep(5)
+        proc.communicate(b'yes')
 
     def _load_function_names(self, filename):
 

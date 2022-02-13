@@ -22,7 +22,7 @@ def main():
         
     print("Setting up kernel for tracing...")
     print("sudo sysctl kernel.yama.ptrace_scope=0")
-    os.system("sudo sysctl kernel.yama.ptrace_scope=0")
+    #os.system("sudo sysctl kernel.yama.ptrace_scope=0") -- docker does not need this
 
     trace(config=config, pid=pid)
 
